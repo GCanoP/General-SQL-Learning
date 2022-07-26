@@ -1,81 +1,80 @@
--- Creating a database. 
 CREATE DATABASE database_example; 
 USE database_example; 
 
--- Creating a table Departments.
-CREATE TABLE Departments (
+-- Creating a table Authors. 
+CREATE TABLE Authors(
 	Id INT NOT NULL AUTO_INCREMENT,
-    Name VARCHAR(25) NOT NULL,
+    Name VARCHAR(70) NOT NULL,
+    Country VARCHAR(100) NOT NULL,
     PRIMARY KEY(Id));
-    
--- Adding data to the table Departments. 
-INSERT INTO Departments
-	(Id, Name)
+-- Adding Data to Table Authors. 
+INSERT INTO Authors
+	(Name, Country)
 VALUES
-	(1, 'HR'),
-    (2, 'Sales'),
-    (3, 'Tech');
+	('J. D. Salinger', 'USA'),
+    ('F. Scott. Fitzgerald', 'USA'),
+    ('Jane Austen', 'UK'),
+    ('Scott Hanselman', 'USA'),
+    ('Jasson N. Gaylord', 'USA'),
+    ('Pranav Rastogi', 'India'),
+    ('Todd Miranda', 'USA'),
+    ('Christian Wenz', 'USA');
 
--- Creating a table Employees.
-CREATE TABLE Employees (
+-- Creating a table Books. 
+CREATE TABLE Books(
 	Id INT NOT NULL AUTO_INCREMENT,
-    FName VARCHAR(35) NOT NULL,
-    LName VARCHAR(35) NOT NULL,
-    PhoneNumber VARCHAR(11),
-    ManagerId INT,
-    DepartmentId INT NOT NULL,
-    Salary INT NOT NULL,
-    HireDate DATETIME NOT NULL,
-    PRIMARY KEY(Id),
-    FOREIGN KEY(ManagerId) REFERENCES Employees(Id),
-    FOREIGN KEY(DepartmentId) REFERENCES Departments(Id));
+    Title VARCHAR(50) NOT NULL,
+    PRIMARY KEY(Id));    
+-- Adding data to table Books. 
+INSERT INTO Books
+	(Title)
+VALUES
+	('The Catcher in the Rye'),
+    ('Nine Stories'),
+    ('Franny and Zooey'),
+    ('The Great Gatsby'),
+    ('Tender in the Night'),
+    ('Pride and Prejudice'),
+    ('Professional ASP.NET 4.5 in C# and VB');
+    
+-- Creating table Book Authors. 
+CREATE TABLE BooksAuthors(
+	AuthorId INT NOT NULL,
+    BookId INT NOT NULL,
+    FOREIGN KEY(AuthorId) REFERENCES Authors(Id),
+    FOREIGN KEY(BookId) REFERENCES Books(Id));
+-- Adding data to table BooksAuthors. 
+INSERT INTO BooksAuthors
+	(BookId, AuthorId)
+VALUES
+	(1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 2),
+    (5, 2),
+    (6, 3),
+    (7, 4),
+    (7, 5),
+    (7, 6),
+    (7, 7),
+    (7, 8);
+    
+-- Code examples.
+SELECT * FROM Authors;
+SELECT * FROM Books; 
+SELECT * FROM Authors WHERE Country = 'USA';
+SELECT * FROM Authors WHERE Country != 'USA';
 
--- Adding data to the table Employeees.
-INSERT INTO Employees
-	(Id, Fname, LName, PhoneNumber, ManagerID, DepartmentID, Salary, HireDate)
-VALUES
-	(1, 'James', 'Smith', 1234567890, NULL, 1, 1000, '2002-01-01'),
-    (2, 'John', 'Johnson', 2468101214, '1', 1, 400, '2005-03-23'),
-    (3, 'Michael', 'William', 1357911131, '1', 2, 600, '2009-12-05'),
-    (4, 'Johnathon', 'Smith', 1212121212, '2', 1, 500, '2016-07-24');
+-- Syntax for an INNER JOIN.
+SELECT
+ba.AuthorId, -- Joining variable. 
+a.Name AuthorName, -- Defining a new alias. 
+ba.BookId, -- Joning variables
+b.Title BookTitle -- Defining a new alias.
+FROM BooksAuthors ba -- Primary Jolin table. 
+	INNER JOIN Authors a ON a.id = ba.authorid
+    INNER JOIN Books b ON b.id = ba.bookid;
     
--- Creating a table Customers. 
-CREATE TABLE Customers(
-	Id INT NOT NULL AUTO_INCREMENT,
-    FName VARCHAR(35) NOT NULL,
-    LName VARCHAR(35) NOT NULL,
-    Email VARCHAR(100),
-    PhoneNumber VARCHAR(11),
-    PreferredContact VARCHAR(5) NOT NULL,
-    PRIMARY KEY(Id));
-    
--- Ading Data to table Customers
-INSERT INTO Customers
-	(Id, FName, LName, Email, PhoneNumber, PreferredContact)
-VALUES
-	(1, 'William', 'Jones', 'william.jones@example.com', '3347927472', 'PHONE'),
-    (2, 'David', 'Miller', 'dmiller@example.com', '2137921892', 'EMAIL'),
-    (3, 'Richard', 'Davis', 'richard01234@example.com', NULL, 'EMAIL');
-    
--- Adding a table Car. 
-CREATE TABLE Car(
-	Id INT NOT NULL AUTO_INCREMENT,
-    CustomerId INT NOT NULL,
-    EmployeeId INT NOT NULL, 
-    Model VARCHAR(50) NOT NULL,
-    Status VARCHAR(25) NOT NULL,
-    TotalCost INT NOT NULL,
-    PRIMARY KEY(Id),
-    FOREIGN KEY(CustomerId) REFERENCES Customers(Id),
-    FOREIGN KEY(EmployeeId) REFERENCES Employees(Id));
+-- Countries table example. 
 
--- Adding Data to Table Car. 
-INSERT INTO Car
-	(Id, CustomerId, EmployeeId, Model, Status, TotalCost)
-VALUES
-	('1', '1', '2', 'Ford F-150', 'READY', '230'),
-    ('2', '1', '2', 'Ford F-150', 'READY', '200'),
-    ('3', '2', '1', 'Ford Mustang', 'WAITING', '100'),
-    ('4', '3', '3', 'Toyota Prius', 'WORKING', '1254');
-    
     
