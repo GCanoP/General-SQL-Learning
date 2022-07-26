@@ -39,6 +39,43 @@ VALUES
     (3, 'Michael', 'William', 1357911131, '1', 2, 600, '2009-12-05'),
     (4, 'Johnathon', 'Smith', 1212121212, '2', 1, 500, '2016-07-24');
     
+-- Creating a table Customers. 
+CREATE TABLE Customers(
+	Id INT NOT NULL AUTO_INCREMENT,
+    FName VARCHAR(35) NOT NULL,
+    LName VARCHAR(35) NOT NULL,
+    Email VARCHAR(100),
+    PhoneNumber VARCHAR(11),
+    PreferredContact VARCHAR(5) NOT NULL,
+    PRIMARY KEY(Id));
+    
+-- Ading Data to table Customers
+INSERT INTO Customers
+	(Id, FName, LName, Email, PhoneNumber, PreferredContact)
+VALUES
+	(1, 'William', 'Jones', 'william.jones@example.com', '3347927472', 'PHONE'),
+    (2, 'David', 'Miller', 'dmiller@example.com', '2137921892', 'EMAIL'),
+    (3, 'Richard', 'Davis', 'richard01234@example.com', NULL, 'EMAIL');
+    
+-- Adding a table Car. 
+CREATE TABLE Car(
+	Id INT NOT NULL AUTO_INCREMENT,
+    CustomerId INT NOT NULL,
+    EmployeeId INT NOT NULL, 
+    Model VARCHAR(50) NOT NULL,
+    Status VARCHAR(25) NOT NULL,
+    TotalCost INT NOT NULL,
+    PRIMARY KEY(Id),
+    FOREIGN KEY(CustomerId) REFERENCES Customers(Id),
+    FOREIGN KEY(EmployeeId) REFERENCES Employees(Id));
 
+-- Adding Data to Table Car. 
+INSERT INTO Car
+	(Id, CustomerId, EmployeeId, Model, Status, TotalCost)
+VALUES
+	('1', '1', '2', 'Ford F-150', 'READY', '230'),
+    ('2', '1', '2', 'Ford F-150', 'READY', '200'),
+    ('3', '2', '1', 'Ford Mustang', 'WAITING', '100'),
+    ('4', '3', '3', 'Toyota Prius', 'WORKING', '1254');
     
     
