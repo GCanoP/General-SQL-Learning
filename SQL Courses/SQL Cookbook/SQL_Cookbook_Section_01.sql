@@ -91,7 +91,7 @@ SELECT sal,
 FROM emp ;
 
 -- 1.13 Searching for Patterns. 
--- Use the LIKE operator in conjunction with the SQL wildcard operator (%):
+-- Use the LIKE operator in conjunction with the SQL wildcard operators (%):
 SELECT 
 	ename AS Employee,
     job AS Job
