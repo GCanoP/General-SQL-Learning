@@ -26,7 +26,7 @@ VALUES
     (20, 'RESEARCH', 'DALLAS'),
     (20, 'SALES', 'CHICAGO'),
     (40, 'OPERATIONS', 'BOSTON');
-
+    
 -- Insert Data into Employee Table. 
 INSERT INTO emp
 	(empno, ename, job, mgr, hiredate, sal, comm, deptno)
