@@ -7,6 +7,12 @@ CREATE TABLE dept(
     dname VARCHAR(30) NOT NULL,
     loc VARCHAR(20));
     
+-- Creating a Emp Bonus Table. 
+CREATE TABLE emp_bonus(
+	empno INT NOT NULL,
+    received DATE NOT NULL,
+    type INT NOT NULL);
+    
 -- Creating a Employee Table. 
 CREATE TABLE emp(
 	empno INT NOT NULL,
@@ -26,6 +32,14 @@ VALUES
     (20, 'RESEARCH', 'DALLAS'),
     (20, 'SALES', 'CHICAGO'),
     (40, 'OPERATIONS', 'BOSTON');
+
+-- Insert Data into Emp Bonus Table. 
+INSERT INTO emp_bonus
+	(empno, received, type)
+VALUES
+	(7369, '2005-03-14', 1),
+    (7900, '2005-03-14', 2),
+    (7780, '2005-03-14', 3);
     
 -- Insert Data into Employee Table. 
 INSERT INTO emp
