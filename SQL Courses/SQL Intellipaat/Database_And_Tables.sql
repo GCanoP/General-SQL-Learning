@@ -13,7 +13,23 @@ CREATE TABLE employee(
     e_gender VARCHAR(20),
     e_dept VARCHAR(20),
     PRIMARY KEY(e_id));
-
+    
+-- Create a Table Departments. 
+CREATE TABLE department(
+	d_id INT NOT NULL AUTO_INCREMENT,
+    d_name VARCHAR(20),
+    d_location VARCHAR(20),
+    PRIMARY KEY(d_id));
+    
+INSERT INTO department
+	(d_name, d_location)
+VALUES
+	('Content', 'New York'),
+    ('Support', 'Chicago'),
+    ('Analytics', 'New York'),
+    ('Sales', 'Boston'),
+    ('Tech', 'Dallas'),
+    ('Finance', 'Chicago');
 
 INSERT INTO employee
 	(e_name, e_salary, e_age, e_gender, e_dept)
