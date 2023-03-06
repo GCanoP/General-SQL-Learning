@@ -36,10 +36,7 @@ RIGHT JOIN department d
 ON (e.e_dept = d.d_name);
 
 -- 1,5 Updating Data Applying a Join Condition. 
-UPDATE employee
-SET e_age = e_age +10
-WHERE e_gender = 'Female';
-
-
-
-
+UPDATE employee e
+JOIN department d ON (e.e_dept = d.d_name)
+SET e.e_age = e.e_age +10
+WHERE d.d_location  = 'New York';
